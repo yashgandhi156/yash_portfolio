@@ -5,10 +5,14 @@ import {
   Paper,
   Stack,
   Divider,
+  Button,
 } from "@mui/material";
 import { FaGraduationCap, FaCode } from "react-icons/fa";
+import { useState } from "react";
 
 export default function About() {
+  const [open, setOpen] = useState(false);
+
   return (
     <Box py={10} id="about">
       <Container maxWidth="lg">
@@ -70,7 +74,7 @@ export default function About() {
             </Stack>
           </Paper>
 
-          {/* About Me Card */}
+          {/* My Journey Card */}
           <Paper
             className="glow-card"
             sx={{
@@ -88,25 +92,44 @@ export default function About() {
               </Typography>
             </Stack>
 
+            {/* SHORT TEXT */}
             <Typography color="gray" lineHeight={1.9}>
               I’m a curious and passionate software developer who genuinely
               enjoys building things that people can use and love. My journey
               started alongside my engineering studies, where I explored coding
-              on my own, solved thousands of problems, and slowly fell in love
-              with backend systems and full-stack development.
-              <br />
-              <br />
-              Beyond code, I’m an active member of my college dance club and
-              have performed in multiple competitions, including Inter IIT and
-              the Y20 Summit. Balancing academics, coding, competitions, and
-              teamwork has shaped my discipline, creativity, and problem-solving
-              mindset.
-              <br />
-              <br />I enjoy working on challenging problems, building real-world
-              products, and constantly pushing myself to learn new technologies.
-              Whether it’s developing scalable applications or brainstorming new
-              ideas, I love turning concepts into reality.
+              on my own and slowly fell in love with backend systems and
+              full-stack development.
             </Typography>
+
+            {/* EXTRA TEXT */}
+            {open && (
+              <Typography color="gray" lineHeight={1.9} mt={2}>
+                Beyond code, I’m an active member of my college dance club and
+                have performed in multiple competitions, including Inter IIT and
+                the Y20 Summit. Balancing academics, coding, competitions, and
+                teamwork has shaped my discipline, creativity, and
+                problem-solving mindset.
+                <br />
+                <br />I enjoy working on challenging problems, building
+                real-world products, and constantly pushing myself to learn new
+                technologies. Whether it’s developing scalable applications or
+                brainstorming new ideas, I love turning concepts into reality.
+              </Typography>
+            )}
+
+            {/* READ MORE BUTTON */}
+            <Button
+              onClick={() => setOpen(!open)}
+              sx={{
+                mt: 2,
+                color: "#22d3ee",
+                textTransform: "none",
+                fontWeight: "bold",
+                "&:hover": { background: "rgba(34,211,238,0.08)" },
+              }}
+            >
+              {open ? "Read less ▲" : "Read more ▼"}
+            </Button>
           </Paper>
         </Stack>
       </Container>
