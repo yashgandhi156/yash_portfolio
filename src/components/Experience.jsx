@@ -59,7 +59,7 @@ export default function Experience() {
         </Typography>
 
         <Box position="relative">
-          {/* Vertical line */}
+          {/* Timeline line */}
           <Box
             sx={{
               position: "absolute",
@@ -71,13 +71,13 @@ export default function Experience() {
             }}
           />
 
-          <Stack spacing={6}>
+          <Stack spacing={5}>
             {experiences.map((exp, i) => {
               const isOpen = openIndex === i;
 
               return (
                 <Box key={i} display="flex" gap={3}>
-                  {/* Timeline dot */}
+                  {/* Dot */}
                   <Box
                     sx={{
                       minWidth: 26,
@@ -86,7 +86,7 @@ export default function Experience() {
                       background: "#020617",
                       border: "2px solid #22d3ee",
                       boxShadow: "0 0 14px #22d3ee",
-                      mt: "38px",
+                      mt: "28px",
                     }}
                   />
 
@@ -102,10 +102,15 @@ export default function Experience() {
                       cursor: "pointer",
                       overflow: "hidden",
 
-                      /* 🔥 KEY PART */
-                      minHeight: 160,
-                      maxHeight: isOpen ? 520 : 160,
-                      transition: "all 0.45s ease",
+                      /* ✅ SAME CLOSED SIZE ON ALL DEVICES */
+                      minHeight: { xs: 120, md: 160 },
+
+                      maxHeight: {
+                        xs: isOpen ? "1000px" : "120px",
+                        md: isOpen ? "520px" : "160px",
+                      },
+
+                      transition: "all 0.45s cubic-bezier(.4,0,.2,1)",
 
                       "&:hover": {
                         boxShadow: "0 0 25px rgba(34,211,238,0.35)",
@@ -113,12 +118,7 @@ export default function Experience() {
                     }}
                   >
                     {/* Always visible */}
-                    <Stack
-                      direction="row"
-                      spacing={1.5}
-                      alignItems="center"
-                      mb={1}
-                    >
+                    <Stack direction="row" spacing={1.5} alignItems="center">
                       <Box color="#22d3ee">
                         <FaBriefcase size={20} />
                       </Box>
@@ -127,19 +127,22 @@ export default function Experience() {
                       </Typography>
                     </Stack>
 
-                    <Typography fontWeight="bold">{exp.company}</Typography>
-                    <Typography color="gray" mb={2}>
-                      {exp.period}
+                    <Typography fontWeight="bold" mt={0.5}>
+                      {exp.company}
                     </Typography>
+                    <Typography color="gray">{exp.period}</Typography>
 
-                    {/* Expand content */}
+                    {/* Expand section */}
                     <Box
                       sx={{
                         opacity: isOpen ? 1 : 0,
+                        maxHeight: isOpen ? 1000 : 0,
+                        overflow: "hidden",
                         transform: isOpen
                           ? "translateY(0)"
-                          : "translateY(-8px)",
-                        transition: "0.35s",
+                          : "translateY(-6px)",
+                        transition: "all 0.4s ease",
+                        mt: isOpen ? 2 : 0,
                       }}
                     >
                       <Stack spacing={1.2} mb={2}>
